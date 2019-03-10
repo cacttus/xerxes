@@ -1,13 +1,9 @@
-Xerxes Distributed C++ Build System
+**Xerxes Distributed C++ Build System**
 
-Derek Page
-
-3 / 10 / 2019
-
-[Overview]
+**Overview**
 The Xerxes build system is a free distributed build system for C++ projects that mimics the commercial IncrediBuild build system.
 
-[Contents]
+**Contents**
 
 buildgui - The client GUI.
 agent_service - The build agent to place on other computers
