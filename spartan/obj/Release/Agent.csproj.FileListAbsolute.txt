@@ -1,0 +1,7 @@
+C:\p4\derek.page\C++\spartanbuild\obj\Release\DistBuild.exe
+C:\p4\derek.page\C++\spartanbuild\obj\Release\DistBuild.pdb
+C:\p4\derek.page\C++\spartanbuild\bin\Release\DistBuild.exe
+C:\p4\derek.page\C++\spartanbuild\bin\Release\DistBuild.pdb
+C:\p4\derek.page\C++\borealis\bin\win32\DistBuild.exe
+C:\p4\derek.page\C++\borealis\bin\win32\DistBuild.pdb
+C:\p4\derek.page\C++\spartanbuild\obj\Release\Agent.csprojResolveAssemblyReference.cache

@@ -1,0 +1,4 @@
+C:\p4\derek.page\c++\spartanbuild\obj\Release\DistBuild.exe
+C:\p4\derek.page\c++\spartanbuild\obj\Release\DistBuild.pdb
+C:\p4\derek.page\c++\borealis\bin\win32\DistBuild.exe
+C:\p4\derek.page\c++\borealis\bin\win32\DistBuild.pdb

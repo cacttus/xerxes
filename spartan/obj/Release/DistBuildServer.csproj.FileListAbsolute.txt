@@ -1,0 +1,4 @@
+C:\Users\John\Desktop\SpartanBuild\bin\Release\DistBuild.exe
+C:\Users\John\Desktop\SpartanBuild\bin\Release\DistBuild.pdb
+C:\Users\John\Desktop\SpartanBuild\obj\Release\DistBuild.exe
+C:\Users\John\Desktop\SpartanBuild\obj\Release\DistBuild.pdb

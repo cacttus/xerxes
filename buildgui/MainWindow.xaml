@@ -1,0 +1,246 @@
+﻿<Window x:Name="MainWindow1" x:Class="BuildGui.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="565" Width="917"
+        Background="#FFC7D3DA" KeyDown="MainWindowKeyDownHandler" Title="Romulus Build Utility" Icon="rr.ico">
+    <Grid x:Name="_grdMainGrid" Margin="0,0,2,-20">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TabControl x:Name="_tabControl" RenderTransformOrigin="0.5,0.5" Margin="1,27,0,185" SelectedIndex="1">
+            <TabItem Header="Control">
+                <Grid Background="#FFE5E5E5" Margin="10,0,5,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Margin="0,37,10,16">
+                        <StackPanel.Effect>
+                            <DropShadowEffect/>
+                        </StackPanel.Effect>
+                        <StackPanel.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFDDE1E6" Offset="0"/>
+                                <GradientStop Color="#FFB7C6D8" Offset="1"/>
+                            </LinearGradientBrush>
+                        </StackPanel.Background>
+                        <Button x:Name="_btnBuild" Content="Build" VerticalAlignment="Top" Margin="27,4,137,10" RenderTransformOrigin="1.08,0.5" Height="61" FontSize="20" FontFamily="Mangal" Click="_btnBuild_Click" BorderBrush="#FF8F7F7F" >
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFA2B697" Offset="0"/>
+                                    <GradientStop Color="#FF085301" Offset="1"/>
+                                    <GradientStop Color="#FFCADEBF" Offset="0.347"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="_btnCleanBuild" Content="Clean + Build" VerticalAlignment="Top" Margin="27,10,340,10" RenderTransformOrigin="1.08,0.5" Height="36" FontSize="20" FontFamily="Mangal" Click="_btnCleanBuild_Click" >
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="WhiteSmoke" Offset="0"/>
+                                    <GradientStop Color="#FFA8B8C3" Offset="0.5"/>
+                                    <GradientStop Color="#FF767D91" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="_btnCancelBuild" Content="Cancel (Ctrl+Break)" Margin="27,10,340,10" FontFamily="Mangal" Click="_btnCancelBuild_Click" Height="28" FontSize="16" IsEnabled="False">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFD1ACAC" Offset="0"/>
+                                    <GradientStop Color="#FFE2BFBF" Offset="0.526"/>
+                                    <GradientStop Color="#FFD33838" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                        <Button x:Name="_btnResetAllAgentsFast" Content="Restart All Agents " VerticalAlignment="Top" RenderTransformOrigin="1.08,0.5" Height="27" FontFamily="Mangal" Foreground="Black" Margin="27,0,340,0" Click="_btnResetAllAgentsFast_Click"  >
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                    <GradientStop Color="#FFD5E2D2" Offset="0"/>
+                                    <GradientStop Color="#FF4B8183" Offset="0.5"/>
+                                    <GradientStop Color="#FF8384A0" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </StackPanel>
+                    <ComboBox x:Name="_cboConfigName" Margin="181,10,0,0" VerticalAlignment="Top" SelectedIndex="0" HorizontalAlignment="Left" Width="98" SelectionChanged="_cboConfigName_SelectionChanged">
+                        <ComboBoxItem Content="Debug"/>
+                        <ComboBoxItem Content="Release"/>
+                    </ComboBox>
+                    <ComboBox x:Name="_cboConfigPlatform" Margin="284,10,0,0" VerticalAlignment="Top" SelectedIndex="0" HorizontalAlignment="Left" Width="101" SelectionChanged="_cboConfigPlatform_SelectionChanged">
+                        <ComboBoxItem Content="Win32"/>
+                        <ComboBoxItem Content="Win64"/>
+                    </ComboBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Output">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="445*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--ScrollViewer VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2" Margin="0,0,86,0"-->
+                    <TreeView x:Name="_tvwOutput" Grid.Column="1" FontFamily="Courier New" FontWeight="Bold" FontSize="12"/>
+                    <!--/ScrollViewer-->
+                </Grid>
+            </TabItem>
+            <TabItem Header="Agents" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="57">
+                <Grid x:Name="_grdAgentGrid" Background="#FFE5E5E5" HorizontalAlignment="Stretch">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <DockPanel x:Name="_spAgentStackPanel" Background="#FFC6DED1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Video" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="57">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="Files Per Second" HorizontalAlignment="Left" Margin="19,13,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="_lblFilesPerSecond" Content="0" HorizontalAlignment="Left" Margin="127,14,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-0.88"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                    <MediaElement x:Name="_objMediaElement" HorizontalAlignment="Left" Height="269" Margin="223,13,0,-4" VerticalAlignment="Top" Width="480"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="_tabSettings" Header="Settings" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="57">
+                <Grid Background="#FFE5E5E5" Margin="0,0,2,0">
+                    <TextBox x:Name="_txtSpartanExePath" HorizontalAlignment="Left" Height="26" Margin="124,48,0,0" TextWrapping="Wrap" Text="C:\p4\dev\proteus\bin\AgentCmd.exe" VerticalAlignment="Top" Width="440" TextChanged="_txtSpartanExePath_TextChanged" PreviewTextInput="_txtSpartanExePath_preview"/>
+                    <Label Content="Spartan Exe Path" HorizontalAlignment="Left" Margin="7,48,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="_txtBuildDirectory" HorizontalAlignment="Left" Height="26" Margin="169,92,0,0" TextWrapping="Wrap" Text="C:\p4\derek.page\c++\borealis\bld" VerticalAlignment="Top" Width="395" TextChanged="_txtBuildDirectory_TextChanged" PreviewTextInput="_txtBuildDirectory_preview" />
+                    <Label Content="Build and Projects Directory" HorizontalAlignment="Left" Margin="7,92,0,0" VerticalAlignment="Top"/>
+                    <Rectangle Height="7" Margin="-2,79,9,0" Stroke="White" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Rectangle Height="7" Margin="-2,125,10,0" Stroke="White" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Button x:Name="_btnSave" Content="Save Settings" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Height="37" FontSize="18" Click="_btnSave_Click" Margin="294,6,0,0"/>
+                    <ListBox x:Name="_lstAgents" HorizontalAlignment="Left" Height="76" Margin="12,166,0,0" VerticalAlignment="Top" Width="228" SelectionChanged="_lstAgents_SelectionChanged" />
+                    <Button x:Name="_btnAdd" Content="Add" HorizontalAlignment="Left" Margin="12,282,0,0" VerticalAlignment="Top" Width="38" Click="_btnAdd_Click"/>
+                    <Button x:Name="_btnRemove" Content="Remove" HorizontalAlignment="Left" Margin="114,282,0,0" VerticalAlignment="Top" Width="50" RenderTransformOrigin="0.54,1.682" Click="_btnRemove_Click"/>
+                    <TextBox x:Name="_txtAgentName" HorizontalAlignment="Left" Height="28" Margin="12,247,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="152" KeyDown="_btnAddAgent_OnKeyDownHandler"/>
+                    <Label Content="Agents" HorizontalAlignment="Left" Margin="12,135,0,0" VerticalAlignment="Top" Width="54"/>
+                    <Rectangle HorizontalAlignment="Left" Height="188" Margin="396,131,0,-8" VerticalAlignment="Top" Width="4" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="#FF9E9E9E" Offset="0.757"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="0.314"/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Button x:Name="_btnCopyAgents" Content="Install All Agents" HorizontalAlignment="Left" Margin="409,270,0,0" VerticalAlignment="Top" Width="145" Click="_btnCopyAgents_Click" Height="23" FontSize="11">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFC8E2BC" Offset="0"/>
+                                <GradientStop Color="#FF96B687" Offset="0.49"/>
+                                <GradientStop Color="#FF708587" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="_btnRestartAgentService" Content="Restart" HorizontalAlignment="Left" Margin="245,166,0,0" VerticalAlignment="Top" Width="80" Click="_btnRestartAgentService_Click" IsEnabled="False"/>
+                    <Button x:Name="_btnStopAgentService" Content="Stop" HorizontalAlignment="Left" Margin="245,220,0,0" VerticalAlignment="Top" Width="80" Click="_btnStopAgentService_Click"/>
+                    <Button x:Name="_btnStartAgentService" Content="Start" HorizontalAlignment="Left" Margin="245,193,0,0" VerticalAlignment="Top" Width="80" Click="_btnStartAgentService_Click"/>
+                    <CheckBox x:Name="_chkShowConsole" Content="Show Output" HorizontalAlignment="Left" Margin="411,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.5" Width="107" Checked="_chkShowConsole_Checked" Unchecked="_chkShowConsole_Unchecked" IsChecked="True"/>
+                    <Button x:Name="_btnResetAllAgents" Content="Reset All Agents with SC (slow)" VerticalAlignment="Top" Margin="409,237,0,0" RenderTransformOrigin="1.08,0.5" Height="26" FontFamily="Mangal" Foreground="Black" Click="_btnResetAllAgents_Click" HorizontalAlignment="Left" Width="271" FontSize="11" IsEnabled="False"  >
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFD5E2D2" Offset="0"/>
+                                <GradientStop Color="#FF4B8183" Offset="0.5"/>
+                                <GradientStop Color="#FF8384A0" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button x:Name="_btnInstallAgent" Content="Install Agent" HorizontalAlignment="Left" Margin="245,259,0,0" VerticalAlignment="Top" Width="80" Height="23" FontSize="11" Click="_btnInstallAgent_Click">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFC8E2BC" Offset="0"/>
+                                <GradientStop Color="#FF96B687" Offset="0.49"/>
+                                <GradientStop Color="#FF708587" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Label Content="VS Solution Name:" HorizontalAlignment="Left" Margin="409,135,0,0" VerticalAlignment="Top"/>
+                    <Rectangle Height="6" Margin="400,194,8,0" Stroke="White" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.Fill>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="Black" Offset="0"/>
+                                <GradientStop Color="White" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Fill>
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                    <Label x:Name="_lblVisualStudioSolutionName" Content="(Not Found)" HorizontalAlignment="Left" Margin="518,135,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Max Error Limit" HorizontalAlignment="Left" Margin="411,162,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="_txtMaxErrorLimit" HorizontalAlignment="Left" Height="23" PreviewTextInput="_txtMaxErrorLimit_preview" DataObject.Pasting="NumericTextPasting" Margin="518,164,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="58" TextChanged="_txtMaxErrorLimit_TextChanged"/>
+                    <CheckBox x:Name="_chkShowCommandWindow" Content="Show Command Window" HorizontalAlignment="Left" Margin="532,209,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.326,0.5" Width="160" Checked="_chkShowCommandWindow_Checked" Unchecked="_chkShowCommandWindow_Unchecked"/>
+                    <CheckBox x:Name="_chkJumpToError" Content="Jump To First Error" HorizontalAlignment="Left" Margin="697,209,0,0" VerticalAlignment="Top" Checked="_chkJumpToError_Checked" Unchecked="_chkJumpToError_Unchecked"/>
+                    <Button x:Name="_btnCancel_Save" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="142" Height="37" FontSize="18" Click="_btnCancel_Save_Click" Margin="450,6,0,0"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Menu Margin="0,0,2,0" Height="22" VerticalAlignment="Top">
+            <MenuItem Header="File" Width="48" Click="MenuItem_Click_1">
+                <MenuItem Header="Exit" HorizontalAlignment="Left" Width="137" Height="22"/>
+            </MenuItem>
+            <MenuItem Header="Edit">
+                <MenuItem Header="Next Error (Alt+0)" HorizontalAlignment="Left" Width="145"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar x:Name="_statusBar" Margin="0,0,0,18" RenderTransformOrigin="0.5,0.5" Height="39" VerticalAlignment="Bottom">
+            <ProgressBar x:Name="_pgbBuildProgress" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="201"/>
+            <Button x:Name="_btnBarStart" Content="Start" Width="210" HorizontalAlignment="Right" Click="Button_Click_1" Foreground="#FF497A4B" FontWeight="ExtraBold" Height="29"/>
+            <Button x:Name="_btnBarStop" Content="Stop" Width="56" Click="Button_Click_3" Foreground="#FF721010" FontWeight="ExtraBold" IsEnabled="False" Height="29"/>
+            <Button x:Name="_btnBarRestartAgents" Content="Restart Agents" Width="98" Click="Button_Click_2" Height="29"/>
+        </StatusBar>
+
+        <TextBox x:Name="_txtOutput" TextWrapping="Wrap" Height="123" VerticalAlignment="Bottom" AcceptsReturn="True" 
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+         ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="0,0,2,57" />
+
+    </Grid>
+</Window>
