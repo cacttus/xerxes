@@ -2,7 +2,7 @@
 
 **Overview**
 
-The Xerxes build system is a free distributed build system for C++ projects that mimics the commercial IncrediBuild build system.
+The Xerxes build system is a free distributed build system for C++ projects that mimics the IncrediBuild build system.
 
 **Contents**
 
