@@ -1,7 +1,7 @@
 **Xerxes Distributed C++ Build System**
 
-![Alt text](/buildgui_screenshot0.jpg?raw=true "Build Gui 0")
-![Alt text](/buildgui_screenshot1.jpg?raw=true "Build Gui 1")
+![Build Gui 0](/buildgui_screenshot0.png "Build Gui 0")
+![Build Gui 1](/buildgui_screenshot1.png "Build Gui 1")
 
 **Overview**
 
