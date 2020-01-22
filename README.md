@@ -2,7 +2,9 @@
 
 *Overview*
 
-The Xerxes build system is a free distributed build system for C++ projects that mimics the IncrediBuild build system.  The sytem works with MSBuild and is created to run in a Visual Studio environment on Windows. The software package contains a graphical user interface and three applications: client application, server application, and build coordinator.
+The Xerxes build system is a free distributed build system for C++ projects that mimics the IncrediBuild build system.  The goal of this project is to speed up large C++ compilations by distributing the C++ files across multiple computers, similar to Linux's distcc.
+
+The sytem works with MSBuild and is created to run in a Visual Studio environment on Windows.  The software package contains a graphical user interface and three applications: client application, server application, and build coordinator.  The applications run over TCP/IP on a local network and can be configured to run over the internet.
 
 *Screenshots*
 
