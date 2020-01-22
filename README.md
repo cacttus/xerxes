@@ -1,4 +1,4 @@
-#Xerxes Distributed C++ Build System
+# Xerxes Distributed C++ Build System
 
 ## *Overview*
 
