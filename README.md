@@ -14,9 +14,13 @@ The sytem works with MSBuild and runs in a Visual Studio environment on Windows.
 ## *Future Additions*
 
 There are a few things that need to be added to Xerxes to make it more usable
-* I started working on a Visual STudio plugin for this software but as of yet was unable to make it fully functional.  The visual studio plugin would definitely help a lot of people out, and in fact, is probably one of the main reasons why someone would use Xerxes over other systems in the first place.
+
+* We started a Visual Studio plugin for this software but it isn't fully functional yet.  The visual studio plugin would definitely help a lot of people out, and in fact, is probably one of the main reasons why someone would use Xerxes over other distributable systems in the first place.
+
 * The installer for this software does not work correctly.  In the future we need to add a nice installer.  
+
 * We will neeed to update the GUI, as it's not very modern.  
+
 * We need to release this software as an executable and provide a website.
 
  
